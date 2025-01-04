@@ -55,10 +55,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -91,10 +88,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -124,10 +118,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -189,15 +180,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "name": { "type": "string" },
-                      "bodyPart": { "type": "string" },
-                      "equipment": { "type": "string" },
-                      "target": { "type": "string" },
-                      "gifUrl": { "type": "string" }
-                    }
+                    "$ref": "#/components/schemas/Exercise"
                   }
                 }
               }
@@ -208,10 +191,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -221,7 +201,7 @@
     },
     "/exercises": {
       "get": {
-        "operationId": "getAllExercises",
+        "operationId": "getExercises",
         "description": "Retrieve all exercises with optional filters",
         "tags": ["Exercises"],
         "parameters": [
@@ -246,15 +226,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "name": { "type": "string" },
-                      "bodyPart": { "type": "string" },
-                      "equipment": { "type": "string" },
-                      "target": { "type": "string" },
-                      "gifUrl": { "type": "string" }
-                    }
+                    "$ref": "#/components/schemas/Exercise"
                   }
                 }
               }
@@ -265,10 +237,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -298,15 +267,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": { "type": "string" },
-                    "name": { "type": "string" },
-                    "bodyPart": { "type": "string" },
-                    "equipment": { "type": "string" },
-                    "target": { "type": "string" },
-                    "gifUrl": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/Exercise"
                 }
               }
             }
@@ -316,10 +277,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -351,15 +309,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "name": { "type": "string" },
-                      "bodyPart": { "type": "string" },
-                      "equipment": { "type": "string" },
-                      "target": { "type": "string" },
-                      "gifUrl": { "type": "string" }
-                    }
+                    "$ref": "#/components/schemas/Exercise"
                   }
                 }
               }
@@ -370,10 +320,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -405,15 +352,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "name": { "type": "string" },
-                      "bodyPart": { "type": "string" },
-                      "equipment": { "type": "string" },
-                      "target": { "type": "string" },
-                      "gifUrl": { "type": "string" }
-                    }
+                    "$ref": "#/components/schemas/Exercise"
                   }
                 }
               }
@@ -424,10 +363,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -459,15 +395,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "name": { "type": "string" },
-                      "bodyPart": { "type": "string" },
-                      "equipment": { "type": "string" },
-                      "target": { "type": "string" },
-                      "gifUrl": { "type": "string" }
-                    }
+                    "$ref": "#/components/schemas/Exercise"
                   }
                 }
               }
@@ -478,10 +406,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -513,10 +438,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": { "type": "string" }
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -525,5 +447,27 @@
       }
     }
   },
-  "components": {}
+  "components": {
+    "schemas": {
+      "Exercise": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "bodyPart": { "type": "string" },
+          "equipment": { "type": "string" },
+          "target": { "type": "string" },
+          "gifUrl": { "type": "string" }
+        },
+        "required": ["id", "name", "bodyPart", "equipment", "target", "gifUrl"]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" }
+        },
+        "required": ["message"]
+      }
+    }
+  }
 }

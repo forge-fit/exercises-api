@@ -26,58 +26,58 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
- * @interface GetExercisesByEquipment200ResponseInner
+ * @interface ErrorResponse
  */
-export interface GetExercisesByEquipment200ResponseInner {
+export interface ErrorResponse {
     /**
      * 
      * @type {string}
-     * @memberof GetExercisesByEquipment200ResponseInner
+     * @memberof ErrorResponse
      */
-    'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetExercisesByEquipment200ResponseInner
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetExercisesByEquipment200ResponseInner
-     */
-    'bodyPart'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetExercisesByEquipment200ResponseInner
-     */
-    'equipment'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetExercisesByEquipment200ResponseInner
-     */
-    'target'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetExercisesByEquipment200ResponseInner
-     */
-    'gifUrl'?: string;
+    'message': string;
 }
 /**
  * 
  * @export
- * @interface GetImageById404Response
+ * @interface Exercise
  */
-export interface GetImageById404Response {
+export interface Exercise {
     /**
      * 
      * @type {string}
-     * @memberof GetImageById404Response
+     * @memberof Exercise
      */
-    'message'?: string;
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Exercise
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Exercise
+     */
+    'bodyPart': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Exercise
+     */
+    'equipment': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Exercise
+     */
+    'target': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Exercise
+     */
+    'gifUrl': string;
 }
 
 /**
@@ -86,45 +86,6 @@ export interface GetImageById404Response {
  */
 export const ExercisesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * Retrieve all exercises with optional filters
-         * @param {number} [offset] Pagination offset
-         * @param {number} [limit] Number of results to return
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllExercises: async (offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/exercises`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (offset !== undefined) {
-                localVarQueryParameter['offset'] = offset;
-            }
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * Retrieve a list of available body parts
          * @param {*} [options] Override http request option.
@@ -175,6 +136,45 @@ export const ExercisesApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve all exercises with optional filters
+         * @param {number} [offset] Pagination offset
+         * @param {number} [limit] Number of results to return
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getExercises: async (offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/exercises`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
 
 
     
@@ -388,19 +388,6 @@ export const ExercisesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ExercisesApiAxiosParamCreator(configuration)
     return {
         /**
-         * Retrieve all exercises with optional filters
-         * @param {number} [offset] Pagination offset
-         * @param {number} [limit] Number of results to return
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAllExercises(offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllExercises(offset, limit, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ExercisesApi.getAllExercises']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Retrieve a list of available body parts
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -417,10 +404,23 @@ export const ExercisesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getExerciseById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetExercisesByEquipment200ResponseInner>> {
+        async getExerciseById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Exercise>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getExerciseById(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ExercisesApi.getExerciseById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve all exercises with optional filters
+         * @param {number} [offset] Pagination offset
+         * @param {number} [limit] Number of results to return
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getExercises(offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Exercise>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getExercises(offset, limit, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ExercisesApi.getExercises']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -429,7 +429,7 @@ export const ExercisesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getExercisesByBodyPart(bodyPart: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>>> {
+        async getExercisesByBodyPart(bodyPart: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Exercise>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getExercisesByBodyPart(bodyPart, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ExercisesApi.getExercisesByBodyPart']?.[localVarOperationServerIndex]?.url;
@@ -441,7 +441,7 @@ export const ExercisesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getExercisesByEquipment(equipment: GetExercisesByEquipmentEquipmentEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>>> {
+        async getExercisesByEquipment(equipment: GetExercisesByEquipmentEquipmentEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Exercise>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getExercisesByEquipment(equipment, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ExercisesApi.getExercisesByEquipment']?.[localVarOperationServerIndex]?.url;
@@ -453,7 +453,7 @@ export const ExercisesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getExercisesByName(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>>> {
+        async getExercisesByName(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Exercise>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getExercisesByName(name, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ExercisesApi.getExercisesByName']?.[localVarOperationServerIndex]?.url;
@@ -465,7 +465,7 @@ export const ExercisesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getExercisesByTarget(target: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>>> {
+        async getExercisesByTarget(target: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Exercise>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getExercisesByTarget(target, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ExercisesApi.getExercisesByTarget']?.[localVarOperationServerIndex]?.url;
@@ -504,16 +504,6 @@ export const ExercisesApiFactory = function (configuration?: Configuration, base
     const localVarFp = ExercisesApiFp(configuration)
     return {
         /**
-         * Retrieve all exercises with optional filters
-         * @param {number} [offset] Pagination offset
-         * @param {number} [limit] Number of results to return
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllExercises(offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>> {
-            return localVarFp.getAllExercises(offset, limit, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Retrieve a list of available body parts
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -527,8 +517,18 @@ export const ExercisesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getExerciseById(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetExercisesByEquipment200ResponseInner> {
+        getExerciseById(id: string, options?: RawAxiosRequestConfig): AxiosPromise<Exercise> {
             return localVarFp.getExerciseById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve all exercises with optional filters
+         * @param {number} [offset] Pagination offset
+         * @param {number} [limit] Number of results to return
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getExercises(offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Exercise>> {
+            return localVarFp.getExercises(offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve a list of exercises by body part
@@ -536,7 +536,7 @@ export const ExercisesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getExercisesByBodyPart(bodyPart: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>> {
+        getExercisesByBodyPart(bodyPart: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Exercise>> {
             return localVarFp.getExercisesByBodyPart(bodyPart, options).then((request) => request(axios, basePath));
         },
         /**
@@ -545,7 +545,7 @@ export const ExercisesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getExercisesByEquipment(equipment: GetExercisesByEquipmentEquipmentEnum, options?: RawAxiosRequestConfig): AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>> {
+        getExercisesByEquipment(equipment: GetExercisesByEquipmentEquipmentEnum, options?: RawAxiosRequestConfig): AxiosPromise<Array<Exercise>> {
             return localVarFp.getExercisesByEquipment(equipment, options).then((request) => request(axios, basePath));
         },
         /**
@@ -554,7 +554,7 @@ export const ExercisesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getExercisesByName(name: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>> {
+        getExercisesByName(name: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Exercise>> {
             return localVarFp.getExercisesByName(name, options).then((request) => request(axios, basePath));
         },
         /**
@@ -563,7 +563,7 @@ export const ExercisesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getExercisesByTarget(target: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<GetExercisesByEquipment200ResponseInner>> {
+        getExercisesByTarget(target: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Exercise>> {
             return localVarFp.getExercisesByTarget(target, options).then((request) => request(axios, basePath));
         },
         /**
@@ -593,18 +593,6 @@ export const ExercisesApiFactory = function (configuration?: Configuration, base
  */
 export class ExercisesApi extends BaseAPI {
     /**
-     * Retrieve all exercises with optional filters
-     * @param {number} [offset] Pagination offset
-     * @param {number} [limit] Number of results to return
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ExercisesApi
-     */
-    public getAllExercises(offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
-        return ExercisesApiFp(this.configuration).getAllExercises(offset, limit, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Retrieve a list of available body parts
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -623,6 +611,18 @@ export class ExercisesApi extends BaseAPI {
      */
     public getExerciseById(id: string, options?: RawAxiosRequestConfig) {
         return ExercisesApiFp(this.configuration).getExerciseById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve all exercises with optional filters
+     * @param {number} [offset] Pagination offset
+     * @param {number} [limit] Number of results to return
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ExercisesApi
+     */
+    public getExercises(offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return ExercisesApiFp(this.configuration).getExercises(offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
