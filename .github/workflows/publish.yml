@@ -66,7 +66,12 @@ jobs:
       - name: Build the package
         run: |
           cd package/generated
-          npm run build || true
+          npx tsc
+
+      - name: Update package.json to publish dist folder
+        run: |
+          cd package/generated
+          jq '.main = "dist/index.js" | .types = "dist/index.d.ts" | .files = ["dist"]' package.json > package.tmp.json && mv package.tmp.json package.json
 
       - name: Publish to GitHub Packages
         run: |
