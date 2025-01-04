@@ -58,16 +58,16 @@ jobs:
             "exclude": ["node_modules"]
           }' > tsconfig.json
 
-      - name: Install TypeScript and generated client dependencies
+      - name: Install TypeScript and dependencies
         run: |
           cd package/generated
+          npm install typescript --save-dev
           npm install
-          npm install --save-dev typescript
 
       - name: Build the package
         run: |
           cd package/generated
-          node_modules/.bin/tsc
+          ./node_modules/.bin/tsc
 
       - name: Update package.json to publish dist folder
         run: |
