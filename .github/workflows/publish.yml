@@ -9,7 +9,6 @@ on:
       - ".github/workflows/publish.yml"
 
 env:
-  GENERATE_OPENAPI: true
   GITHUB_PACKAGES_TOKEN: ${{ secrets.PAT_TOKEN }}
 
 jobs:
