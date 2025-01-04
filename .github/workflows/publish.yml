@@ -28,7 +28,7 @@ jobs:
 
       - name: Authenticate to npm
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
           echo "@forge-fit:registry=https://npm.pkg.github.com" >> ~/.npmrc
 
       - name: Generate TypeScript client with Axios
@@ -58,15 +58,16 @@ jobs:
             "exclude": ["node_modules"]
           }' > tsconfig.json
 
-      - name: Install generated client dependencies
+      - name: Install TypeScript and generated client dependencies
         run: |
           cd package/generated
           npm install
+          npm install --save-dev typescript
 
       - name: Build the package
         run: |
           cd package/generated
-          npx tsc
+          node_modules/.bin/tsc
 
       - name: Update package.json to publish dist folder
         run: |
