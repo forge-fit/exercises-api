@@ -457,9 +457,26 @@
           "bodyPart": { "type": "string" },
           "equipment": { "type": "string" },
           "target": { "type": "string" },
-          "gifUrl": { "type": "string" }
+          "gifUrl": { "type": "string" },
+          "instructions": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "secondaryMuscles": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
         },
-        "required": ["id", "name", "bodyPart", "equipment", "target", "gifUrl"]
+        "required": [
+          "id",
+          "name",
+          "bodyPart",
+          "equipment",
+          "target",
+          "gifUrl",
+          "instructions",
+          "secondaryMuscles"
+        ]
       },
       "ErrorResponse": {
         "type": "object",

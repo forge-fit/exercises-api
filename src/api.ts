@@ -78,6 +78,18 @@ export interface Exercise {
      * @memberof Exercise
      */
     'gifUrl': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Exercise
+     */
+    'instructions': Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Exercise
+     */
+    'secondaryMuscles': Array<string>;
 }
 
 /**
