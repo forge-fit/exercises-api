@@ -28,57 +28,11 @@ jobs:
 
       - name: Authenticate to npm
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           echo "@forge-fit:registry=https://npm.pkg.github.com" >> ~/.npmrc
-
-      - name: Install TypeScript Globally
-        run: npm install -g typescript
-
-      - name: Generate TypeScript client with Axios
-        run: |
-          mkdir -p package
-          cp openapi.json package/
-          cd package
-          npm init -y
-          npm install --save-dev @openapitools/openapi-generator-cli
-          npx openapi-generator-cli generate -i openapi.json -g typescript-axios -o ./generated
-
-      - name: Add tsconfig.json
-        run: |
-          cd package/generated
-          echo '{
-            "compilerOptions": {
-              "outDir": "./dist",
-              "module": "commonjs",
-              "target": "es6",
-              "sourceMap": true,
-              "strict": true,
-              "esModuleInterop": true,
-              "skipLibCheck": true,
-              "forceConsistentCasingInFileNames": true
-            },
-            "include": ["./**/*.ts"],
-            "exclude": ["node_modules"]
-          }' > tsconfig.json
-
-      - name: Install generated client dependencies
-        run: |
-          cd package/generated
-          npm install
-
-      - name: Build the package
-        run: |
-          cd package/generated
-          tsc
-
-      - name: Update package.json to publish dist folder
-        run: |
-          cd package/generated
-          jq '.main = "dist/index.js" | .types = "dist/index.d.ts" | .files = ["dist"]' package.json > package.tmp.json && mv package.tmp.json package.json
 
       - name: Publish to GitHub Packages
         run: |
-          cd package/generated
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT_TOKEN }}
