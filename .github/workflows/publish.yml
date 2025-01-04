@@ -30,6 +30,12 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           echo "@forge-fit:registry=https://npm.pkg.github.com" >> ~/.npmrc
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
       - name: Publish to GitHub Packages
         run: |
           npm publish --access public
