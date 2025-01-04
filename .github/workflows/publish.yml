@@ -5,9 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
-      - 'package.json'
-      - '.github/workflows/publish.yml'
+      - "package.json"
+      - ".github/workflows/publish.yml"
 
 env:
   GENERATE_OPENAPI: true
@@ -23,9 +22,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
           registry-url: https://npm.pkg.github.com/
-          scope: '@fit-track'
+          scope: "@forge-fit"
 
       - name: Install dependencies
         run: npm ci
@@ -38,7 +37,28 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           echo "@fit-track:registry=https://npm.pkg.github.com" >> ~/.npmrc
 
-      - name: Publish to NPM
-        run: npm publish --access public
+      - name: Generate TypeScript client with Axios
+        run: |
+          mkdir -p package
+          cp openapi.json package/
+          cd package
+          npm init -y
+          npm install --save-dev @openapitools/openapi-generator-cli
+          npx openapi-generator-cli generate -i openapi.json -g typescript-axios -o ./generated
+
+      - name: Install generated client dependencies
+        run: |
+          cd package/generated
+          npm install
+
+      - name: Build the package
+        run: |
+          cd package/generated
+          npm run build
+
+      - name: Publish to GitHub Packages
+        run: |
+          cd package/generated
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT_TOKEN }}
